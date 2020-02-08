@@ -11,19 +11,16 @@ Até recentemente sabia muito pouco o porque usar o `conda`. Para quem não sabe
 
 A pergunta que surge é: porque usar ambientes virtuais? Vou dar duas razões: 1) isolar dependências, 2) reprodutibilidade.
 
-Suponha que você esteja trabalhando em dois projeto diferentes, digamos A e B, o projeto A depende do pacote _x_ na versão 1.0 e projeto B depende do mesmo pacote na versão 0.9. Neste caso, não é possível trabalhar em um projeto sem quebrar o outro, se você estiver trabalho no mesmo ambiente virtual. Com o `conda` você pode criar um ambiente para cada projeto, assim não haverá interações entre eles.
+Suponha que você esteja trabalhando em dois projeto diferentes, digamos A e B, o projeto A depende do pacote _x_ na versão 1.0 e projeto B depende do mesmo pacote na versão 0.9. Neste caso, não é possível trabalhar em um projeto sem quebrar o outro, se você estiver trabalhando no mesmo ambiente virtual. Com o `conda` você pode criar um ambiente para cada projeto, assim não haverá interações entre eles.
 
 Considerando o segundo motivo, dado que você está trabalhando em um ambiente virtual, é possível exportar todas as dependências para um arquivo `.yml` e compartilhá-lo. Assim, outra pessoa poderá reproduzir o mesmo ambiente em sua própria máquina.
 
 ## Primeiros passos com conda
 
-__TODO__
 
-Partiremos do pressuposto de que você já tem o _conda_ instalado na sua máquina. Eu usei uma instalação do spyder e python da distribuição anaconda no Windows 7 para testar esses passos. Para instalar, a distribuição Anacoda do python use link [link](https://www.anaconda.com/distribution/) para baixar o instalador e pode seguir o passos desse [tutorial](https://lamfo-unb.github.io/2017/06/10/Instalando-Python/).
+Partiremos do pressuposto de que você já tem o _conda_ instalado na sua máquina. Eu usei uma instalação do spyder e python da distribuição anaconda no Windows 7 para testar esses passos. Para instalar, a distribuição Anacoda do python use link [link](https://www.anaconda.com/distribution/) para baixar o instalador esse [tutorial](https://lamfo-unb.github.io/2017/06/10/Instalando-Python/) da passo a passo para a instalação.
 
-Assim, abra o anacoda prompt, no windows ele parece com o cmd.
-
-O console aparecerá piscando com a seguinte linha de comando.
+Para iniciar, abra o anacoda prompt. O console aparecerá piscando com a seguinte linha de comando.
 
 ```
 (base) C:\Users\nome_usuario>
@@ -34,7 +31,7 @@ O parte `(base) ` significa que o estamos no ambiente base ou raiz da sua instal
 conda create --name my_env python=3.7
 ```
 
-Neste caso estamos criando um ambiente cujo o nome é "my_env". A parte `python=3.7` significa que vamos usar o python 3.7 nesse ambiente. Essa comando é opcional, caso o omitimos o ambiente será iniciado com a mesma versão do python instalado no ambiente base.
+Neste caso, estamos criando um ambiente cujo o nome é "my_env". A parte `python=3.7` significa que vamos usar o python 3.7 nesse ambiente. Essa comando é opcional, caso o omitimos o ambiente será iniciado com a mesma versão do python instalado no ambiente base.
 
 Após criar o ambiente virtual, podemos ativá-lo usando:
 
@@ -53,11 +50,12 @@ Assim o console mudará para:
 (my_env) C:\Users\nome_usuario>
 ```
 
-
 Para  instalar pacotes no ambiente `my_env` usamos a conda normalmente, isto é:
+
 ```
 (my_env) C:\Users\nome_usuario> conda install package_name
 ```
+
 Para voltar para o ambiente base, rodamos o seguinte comando:
 
 ```
@@ -81,6 +79,7 @@ conda activate my_env
 conda install -c anaconda spyder=3
 spyder
 ```
+
 Entretanto, essa não é a melhor forma, uma vez que, para cada ambiente teríamos uma instalação para spyder diferente, a instalação pode demorar e quando formos compartilhar o nosso projeto a spyder estará lá desnecessariamente.
 
 A segunda alternativa é mudar o caminho do interpretador usado pelo spyder. Neste caso, precisaríamos do spyder instalado em apenas um ambiente virtual, que pode ser o ambiente base.
