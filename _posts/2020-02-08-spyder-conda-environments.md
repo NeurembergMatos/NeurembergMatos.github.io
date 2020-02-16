@@ -4,19 +4,22 @@ title: "Usando spyder com conda environments"
 author: "Neuremberg de Matos"
 categories: infraestrura
 tags: [python, conda]
-image: ./spyder-conda-environments/conda-blog.jpg
+image: ./spyder-conda-environments/environment.jpg
 ---
+*Photo by Sebastian Unrau on Unsplash*
 
-Até recentemente sabia muito pouco o porque usar o `conda`. Para quem não sabe `conda` é um gerenciador de pacotes para o python e ao mesmo tempo um gerenciador de de ambientes virtuais. Enquanto o `pip` é um gerenciador de pacote e `pyenv` é um gerenciador de ambientes virtuais, o `conda` faz os dois papeis.
 
-A pergunta que surge é: porque usar ambientes virtuais? Vou dar duas razões: 1) isolar dependências, 2) reprodutibilidade.
+Até recentemente sabia muito pouco o porque usar o `conda`. Entretanto, a medida que precisei construir aplicações mais complexas achei necessário o uso de ambientes virtuais.
+
+O `conda` é um gerenciador de pacotes e ao mesmo tempo um gerenciador de de ambientes virtuais. Enquanto o `pip` é um gerenciador de pacote e `pyenv` é um gerenciador de ambientes virtuais ambos para python, o `conda` faz os dois papeis e não se restrige apenas a pacotes python. Note que `conda` é diferente de `Anaconda`, esta é uma distribuição de pacotes.
+
+A pergunta que surge é: por que usar ambientes virtuais? Vou dar duas razões: 1) isolar dependências, 2) reprodutibilidade.
 
 Suponha que você esteja trabalhando em dois projeto diferentes, digamos A e B, o projeto A depende do pacote _x_ na versão 1.0 e projeto B depende do mesmo pacote na versão 0.9. Neste caso, não é possível trabalhar em um projeto sem quebrar o outro, se você estiver trabalhando no mesmo ambiente virtual. Com o `conda` você pode criar um ambiente para cada projeto, assim não haverá interações entre eles.
 
 Considerando o segundo motivo, dado que você está trabalhando em um ambiente virtual, é possível exportar todas as dependências para um arquivo `.yml` e compartilhá-lo. Assim, outra pessoa poderá reproduzir o mesmo ambiente em sua própria máquina.
 
 ## Primeiros passos com conda
-
 
 Partiremos do pressuposto de que você já tem o _conda_ instalado na sua máquina. Eu usei uma instalação do spyder e python da distribuição anaconda no Windows 7 para testar esses passos. Para instalar, a distribuição Anacoda do python use link [link](https://www.anaconda.com/distribution/) para baixar o instalador esse [tutorial](https://lamfo-unb.github.io/2017/06/10/Instalando-Python/) da passo a passo para a instalação.
 
@@ -112,4 +115,4 @@ copiar o caminho mostrado
 
 Agora é só aproveitar o seu novo ambiente.
 
-Eu usei uma instalação do spyder e python da distribuição anaconda no Windows 7 para testar esses passos. Em todo caso, você pode encontrar a documentação do spyder sobre isso [aqui](https://github.com/spyder-ide/spyder/wiki/Working-with-packages-and-environments-in-Spyder).
+Eu usei uma instalação do spyder e python 3.7 da distribuição anaconda no Windows 7 para testar esses passos, a segunda solução não funcionou para versões do python menor que 3.7. Em todo caso, você pode encontrar a documentação do spyder sobre isso [aqui](https://github.com/spyder-ide/spyder/wiki/Working-with-packages-and-environments-in-Spyder).
