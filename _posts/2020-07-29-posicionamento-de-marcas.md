@@ -73,12 +73,13 @@ teste_componentes <- toothpaste %>%
   as.data.frame() %>% 
   PCA(X = ., graph = FALSE)
 
-teste_componentes$eig %>% 
-  print()
+componentes <- as.data.frame(teste_componentes$eig)
+names(componentes) <- gsub(pattern = ' ', replacement = '_', x = names(componentes), )
+componentes
 ```
 
 ```
-##        eigenvalue percentage of variance cumulative percentage of variance
+##        eigenvalue percentage_of_variance cumulative_percentage_of_variance
 ## comp 1 2.73118833              45.519806                          45.51981
 ## comp 2 2.21811927              36.968654                          82.48846
 ## comp 3 0.44159791               7.359965                          89.84843
@@ -203,7 +204,7 @@ A marca *E* é principalmente percebida como tendo produtos que impactam na apar
 
 Essas conclusões foram determinadas a partir das relações entre os vetores que representam a os atributos e os vetores que representam as percepções sobre as marcas. Tais relações são mostradas a seguir:
 
-<img src="./posicionamento-marcas/interpretacao-vetores.PNG" style="display: block; margin: auto;" />
+<img src="/assets/img/posicionamento-marcas/interpretacao-vetores.PNG" style="display: block; margin: auto;" />
 
 No primeiro $(I)$ caso, o vetor *M* e *N* possuem alguma semelhança entre si, o grau com que *M* é semelhante com *N* é medida pela projeção ortogonal de *N* sobre *M*, isto é, a "sombra" de *N* sobre *M*. No segundo caso $(II)$, *M* e *N* não possuem nenhuma relação entre si e por fim no caso $(III)$ os vetores possuem relação opostas. Além disso, o tamanho da seta/vetor indica a intensidade do atributo/percepção representado.
 
