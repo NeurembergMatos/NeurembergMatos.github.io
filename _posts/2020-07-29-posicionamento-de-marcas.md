@@ -33,7 +33,7 @@ source('../functions/functions.R', local = funcs)
 
 ### Os dados
 
-O *dataset* que será analisado corresponde a um conjunto de dados oriundo de *survey* sobre como os respondentes avaliam as características associadas às marcas de pasta de dentes. A seguir, vamos carregar esses dados e exibir as primeiras observações:
+O *dataset* que será analisado corresponde a um conjunto de dados oriundo de *survey* sobre como os respondentes avaliam as características associadas às marcas de pasta de dentes. A seguir, vamos carregar esses dados e exibir exibir sua estrutura:
 
 
 ```r
@@ -43,16 +43,18 @@ toothpaste %>%
   knitr::kable()
 ```
 
-
-
-| consumer| prevents_cavities| shiny_teeth| strengthens_gums| freshens_breath| decay_prevention_unimportant| attractive_teeth| age|gender |
-|--------:|-----------------:|-----------:|----------------:|---------------:|----------------------------:|----------------:|---:|:------|
-|        1|                 7|           3|                6|               4|                            2|                4|  50|Female |
-|        2|                 1|           3|                2|               4|                            5|                4|  27|Female |
-|        3|                 6|           2|                7|               4|                            1|                3|  24|Female |
-|        4|                 4|           5|                4|               6|                            2|                5|  21|Female |
-|        5|                 1|           2|                2|               3|                            6|                2|  34|Female |
-|        6|                 6|           3|                6|               4|                            2|                4|  39|Female |
+```
+## tibble [60 x 9] (S3: tbl_df/tbl/data.frame)
+##  $ consumer                    : num [1:60] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ prevents_cavities           : num [1:60] 7 1 6 4 1 6 5 6 3 2 ...
+##  $ shiny_teeth                 : num [1:60] 3 3 2 5 2 3 3 4 4 6 ...
+##  $ strengthens_gums            : num [1:60] 6 2 7 4 2 6 6 7 2 2 ...
+##  $ freshens_breath             : num [1:60] 4 4 4 6 3 4 3 4 3 6 ...
+##  $ decay_prevention_unimportant: num [1:60] 2 5 1 2 6 2 4 1 6 7 ...
+##  $ attractive_teeth            : num [1:60] 4 4 3 5 2 4 3 4 3 6 ...
+##  $ age                         : num [1:60] 50 27 24 21 34 39 50 54 32 24 ...
+##  $ gender                      : chr [1:60] "Female" "Female" "Female" "Female" ...
+```
 
 Cada respondente, `consumer`, avalia a importância de seis atributos de creme dental: `prevents_cavities`, `shiny_teeth`, `strengthens_gums`, `freshens_breath`, `decay_prevention_unimportant` e `attractive_teeth`. Além disso, foram registradas as informações sobre idade, `age`, e gênero, `gender` dos respondentes. Cada respondente atribui um valor de 1 a 7 para indicar o quanto acha importante o atributo avaliado, sendo 1 pouco importante e 7 muito importante.
 
@@ -91,7 +93,7 @@ teste_componentes$eig %>%
 fviz_eig(teste_componentes, main = 'Contribuição de cada componente')
 ```
 
-<img src="./posicionamento-marcas/teste-componentes-1.png" style="display: block; margin: auto;" />
+<img src="/assets/img/posicionamento-marcas/teste-componentes-1.png" style="display: block; margin: auto;" />
 
 O primeiro componente explica $45,5\%$ da variância dos dados e o segundo componente $36,9\%$, juntos esses componentes explicam mais de $82,4\%$ da variância dos dados. Portanto esses dois componentes são uma representação aceitável dos dados. Dessa forma, vamos aplicar o *PCA* com dois componentes e construir um gráfico *2D*.
 
@@ -113,7 +115,7 @@ fviz_pca_biplot(X = pca_2comp, label = 'var', repel = TRUE) +
   labs(title = 'Mapa de preferências - Toothpaste')
 ```
 
-<img src="./posicionamento-marcas/map-preferencias-1.png" style="display: block; margin: auto;" />
+<img src="/assets/img/posicionamento-marcas/map-preferencias-1.png" style="display: block; margin: auto;" />
 
 
 Nesse gráfico, os atributos avaliados são representados através das setas e as preferências dos respondentes são representados através dos pontos. Podemos perceber que há três grupos de respondentes de acordo com suas preferências, tem aqueles valorizam bastante os efeitos estéticos das pastas de dentes - próximos dos atributos `attractive_teeth`, `shiny_teeth` e `freshens_breath` -, outros valorizam bastante os efeitos na saúde dental - próximos à `prevents_cavities` e `strengthens_gums` - e aqueles não que consideram a prevenção de caries importante - próximo à `decay_prevention_unimportant`.
@@ -148,7 +150,7 @@ map_prefer <- fviz_pca_biplot(X = pca_2comp, label = 'var', repel = TRUE) +
 map_prefer
 ```
 
-<img src="./posicionamento-marcas/interpretacao-componente-1.png" style="display: block; margin: auto;" />
+<img src="/assets/img/posicionamento-marcas/interpretacao-componente-1.png" style="display: block; margin: auto;" />
 
 
 Do ponto de vista de negócios, uma grande implicação do gráfico acima é a segmentação dos clientes a partir de seus gostos e a possibilidade de criar produtos diferenciados, direcionados a segmentos específicos. Assim, uma marca pode desenvolver dois produtos: um direcionados a clientes que se preocupa mais com a estética e outro com clientes que se preocupam mais com a saúde dos dentes e comunicar isso através de um marketing diferenciado.
@@ -197,7 +199,7 @@ funcs$add_empresas(gp = map_prefer, empresas = labels_emp, coordenadas = repre) 
   labs(title = "Mapa Join-Space - Toothpaste")
 ```
 
-<img src="./posicionamento-marcas/join-map-1.png" style="display: block; margin: auto;" />
+<img src="/assets/img/posicionamento-marcas/join-map-1.png" style="display: block; margin: auto;" />
 
 No gráfico acima, os atributos são representados pelas setas em azul, as preferências dos respondentes são representadas pelos pontos e as percepções sobre as empresas são representadas pelas setas em vermelho. Assim, vemos o posicionamento das empresas *A, B, C, D* e *E* assim como a preferência dos consumidores.
 
