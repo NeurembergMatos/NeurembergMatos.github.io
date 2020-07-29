@@ -67,7 +67,6 @@ O *PCA* tem como objetivo representar dados que originalmente está em uma alta 
 
 Deste modo vamos aplicar o *PCA* com 5 componentes principais e observar a o quantos esses componentes explicam a variância dos dados:
 
-
 ```r
 teste_componentes <- toothpaste %>% 
   select(-consumer, -age, -gender) %>% 
@@ -75,19 +74,18 @@ teste_componentes <- toothpaste %>%
   PCA(X = ., graph = FALSE)
 
 teste_componentes$eig %>% 
-  knitr::kable()
+  print()
 ```
 
-
-
-|       | eigenvalue| percentage of variance| cumulative percentage of variance|
-|:------|----------:|----------------------:|---------------------------------:|
-|comp 1 |  2.7311883|              45.519805|                          45.51981|
-|comp 2 |  2.2181193|              36.968654|                          82.48846|
-|comp 3 |  0.4415979|               7.359965|                          89.84843|
-|comp 4 |  0.3412576|               5.687627|                          95.53605|
-|comp 5 |  0.1826282|               3.043804|                          98.57986|
-|comp 6 |  0.0852086|               1.420144|                         100.00000|
+```
+##        eigenvalue percentage of variance cumulative percentage of variance
+## comp 1 2.73118833              45.519806                          45.51981
+## comp 2 2.21811927              36.968654                          82.48846
+## comp 3 0.44159791               7.359965                          89.84843
+## comp 4 0.34125765               5.687627                          95.53605
+## comp 5 0.18262823               3.043804                          98.57986
+## comp 6 0.08520861               1.420144                         100.00000
+```
 
 ```r
 fviz_eig(teste_componentes, main = 'Contribuição de cada componente')
@@ -122,22 +120,19 @@ Nesse gráfico, os atributos avaliados são representados através das setas e a
 
 A princípio os componentes não possuem nenhuma interpretação. Entretanto, podemos dar algum sentido a eles observando como as variáveis representadas estão correlacionados com eles.
 
-
 ```r
-pca_2comp$var$cor %>% 
-  knitr::kable()
+pca_2comp$var$cor 
 ```
 
-
-
-|                             |      Dim.1|      Dim.2|
-|:----------------------------|----------:|----------:|
-|prevents_cavities            |  0.9283425|  0.2532285|
-|shiny_teeth                  | -0.3005297|  0.7952496|
-|strengthens_gums             |  0.9361812|  0.1308894|
-|freshens_breath              | -0.3415817|  0.7889663|
-|decay_prevention_unimportant | -0.8687553| -0.3507939|
-|attractive_teeth             | -0.1766389|  0.8711581|
+```
+##                                   Dim.1      Dim.2
+## prevents_cavities             0.9283425  0.2532285
+## shiny_teeth                  -0.3005297  0.7952496
+## strengthens_gums              0.9361812  0.1308894
+## freshens_breath              -0.3415817  0.7889663
+## decay_prevention_unimportant -0.8687553 -0.3507939
+## attractive_teeth             -0.1766389  0.8711581
+```
 
 Podemos ver que os atributos `prevents_cavities`, `strengthens_gums` e `decay_prevention_unimportant` estão bastantes correlacionados com o primeiro componente e os atributos `shiny_teeth`, `attractive_teeth` e `freshens_breath` estão bastante correlacionados com a segundo. Assim, a primeira dimensão pode ser interpretada como a importância dada aos efeitos sobre a saúde dental e a segunda dimensão pode ser interpretada como importância dada à efeitos estéticos sobre os dentes.
 
@@ -169,18 +164,19 @@ Agora, vamos trabalhar com um conjunto de dados simulado acerca da percepção d
 ```r
 empresas <- read.csv2('../resultados/empresas-04.csv', stringsAsFactors = FALSE)
 empresas %>% 
-  knitr::kable()
+  str()
 ```
 
-
-
-|empresas | prevents_cavities| shiny_teeth| strengthens_gums| freshens_breath| decay_prevention_unimportant| attractive_teeth|
-|:--------|-----------------:|-----------:|----------------:|---------------:|----------------------------:|----------------:|
-|A        |               1.4|         4.4|              4.6|             5.2|                          5.4|              1.0|
-|B        |               1.2|         2.0|              4.6|             1.4|                          1.8|              1.0|
-|C        |               6.0|         2.6|              3.8|             5.8|                          1.8|              3.2|
-|D        |               2.2|         3.0|              2.6|             2.4|                          5.6|              2.6|
-|E        |               3.6|         7.0|              3.6|             6.6|                          5.4|              2.8|
+```
+## 'data.frame':  5 obs. of  7 variables:
+##  $ empresas                    : chr  "A" "B" "C" "D" ...
+##  $ prevents_cavities           : num  1.4 1.2 6 2.2 3.6
+##  $ shiny_teeth                 : num  4.4 2 2.6 3 7
+##  $ strengthens_gums            : num  4.6 4.6 3.8 2.6 3.6
+##  $ freshens_breath             : num  5.2 1.4 5.8 2.4 6.6
+##  $ decay_prevention_unimportant: num  5.4 1.8 1.8 5.6 5.4
+##  $ attractive_teeth            : num  1 1 3.2 2.6 2.8
+```
 
 Cada linha representa uma empresa e os dados são a média de avaliação para cada atributos. 
 
