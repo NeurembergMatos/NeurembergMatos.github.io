@@ -37,9 +37,7 @@ O *dataset* que será analisado corresponde a um conjunto de dados oriundo de *s
 
 ```r
 toothpaste <- read_xlsx('../data/toothpaste.xlsx')
-toothpaste %>% 
-  head() %>% 
-  knitr::kable()
+str(toothpaste)
 ```
 
 ```
