@@ -8,8 +8,6 @@ image: ./posicionamento-marcas/capa.jpg
 ---
 *Photo by Anastasia Petrova on Unsplash*
 
-## Posicionamento de marca e preferências dos consumidores
-
 Vivemos em um mundo da informação e somos bombardeados constantemente. Um ponto negativo disso é que cada vez mais a nossa atenção está fragmentada. As marcas sabem disso, e sabem que precisam ser marcantes para que sejam lembradas pelos consumidores. Isto é, elas precisam ser claramente distintas dos concorrentes para que tenham sucesso.
 
 O posicionamento de uma organização na mente do consumidor é resultado de uma estratégia deliberada para desenvolver produtos com características distintas dos seus concorrentes e comunicar essas diferenças aos consumidores. O posicionamento de uma marca é a percepção que os consumidores têm dela.
@@ -30,6 +28,7 @@ funcs <- new.env()
 source('../functions/functions.R', local = funcs)
 ```
 
+As funções foram criadas estão disponíveis [aqui](https://github.com/NeurembergMatos/marketing-analitico/tree/master/posicionamento-marcas).
 
 ### Os dados
 
