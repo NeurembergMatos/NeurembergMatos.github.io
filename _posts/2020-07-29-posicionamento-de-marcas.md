@@ -32,7 +32,7 @@ As funções foram criadas estão disponíveis [aqui](https://github.com/Neuremb
 
 ### Os dados
 
-O *dataset* que será analisado corresponde a um conjunto de dados oriundo de *survey* sobre como os respondentes avaliam as características associadas às marcas de pasta de dentes. A seguir, vamos carregar esses dados e exibir exibir sua estrutura:
+O *dataset* que será analisado corresponde a um conjunto de dados oriundo de um *survey* sobre como os respondentes avaliam as características associadas às marcas de creme de dental. A seguir, vamos carregar esses dados e exibir sua estrutura:
 
 
 ```r
@@ -55,14 +55,14 @@ str(toothpaste)
 
 Cada respondente, `consumer`, avalia a importância de seis atributos de creme dental: `prevents_cavities`, `shiny_teeth`, `strengthens_gums`, `freshens_breath`, `decay_prevention_unimportant` e `attractive_teeth`. Além disso, foram registradas as informações sobre idade, `age`, e gênero, `gender` dos respondentes. Cada respondente atribui um valor de 1 a 7 para indicar o quanto acha importante o atributo avaliado, sendo 1 pouco importante e 7 muito importante.
 
-Queremos entender qual as preferências dos indivíduos sobre os atributos de um creme dental. Desta forma, gostaríamos de visualizar o posicionamento de cada respondente em um gráfico. Para fazer isso, vamos reduzir a dimensionalidade dos dados de modo a representar as preferências em gráfico *2D* ou *3D* usando *PCA*. Assim, cada eixo do gráfico será representado por um componente principal obtido a partir do *PCA*.
+Queremos entender qual as preferências dos indivíduos sobre os atributos de um creme dental. Desta forma, gostaríamos de visualizar o posicionamento de cada respondente em um gráfico. Para fazer isso, vamos reduzir a dimensionalidade dos dados de modo a representar as preferências em um gráfico *2D* ou *3D* usando *PCA*. Assim, cada eixo do gráfico será representado por um componente principal obtido a partir do *PCA*.
 
 
 ### PCA - *Principal Components Analysis*
 
-O *PCA* tem como objetivo representar dados que originalmente está em uma alta dimensão em uma dimensão menor. De modo que essa representação consiga manter a maior quantidade possível da variância original dos dados. A regra de ouro é que a representação consiga explicar ao menos $70\%$ da variância original dos dados para seja aceitável.
+O *PCA* tem como objetivo representar dados que originalmente está em uma alta dimensão em uma dimensão menor. De modo que essa representação consiga manter a maior quantidade possível da variância original dos dados. A regra de ouro é que a representação consiga explicar ao menos $70\%$ da variância original dos dados para que seja aceitável.
 
-Deste modo vamos aplicar o *PCA* com 5 componentes principais e observar a o quantos esses componentes explicam a variância dos dados:
+Deste modo, vamos aplicar o *PCA* com 5 componentes principais e observar o quantos esses componentes explicam a variância dos dados:
 
 ```r
 teste_componentes <- toothpaste %>% 
@@ -91,7 +91,7 @@ fviz_eig(teste_componentes, main = 'Contribuição de cada componente')
 
 <img src="/assets/img/posicionamento-marcas/teste-componentes-1.png" style="display: block; margin: auto;" />
 
-O primeiro componente explica $45,5\%$ da variância dos dados e o segundo componente $36,9\%$, juntos esses componentes explicam mais de $82,4\%$ da variância dos dados. Portanto esses dois componentes são uma representação aceitável dos dados. Dessa forma, vamos aplicar o *PCA* com dois componentes e construir um gráfico *2D*.
+O primeiro componente explica $45,5\%$ da variância dos dados e o segundo componente $37\%$, juntos esses componentes explicam mais de $82,4\%$ da variância dos dados. Portanto, esses dois componentes são uma representação aceitável dos dados. Dessa forma, vamos aplicar o *PCA* com dois componentes e construir um gráfico *2D*.
 
 
 ```r
@@ -103,7 +103,7 @@ pca_2comp <- toothpaste %>%
 
 ### Mapa de preferências
 
-O que estamos tentando fazer é representar os seis atributos em termos de dois componentes. O gráfico com a representação das preferências dos respondentes é chamado de mapa de preferências, que mostrar a relação dos respondentes com os atributos avaliados.
+O que estamos tentando fazer é representar os seis atributos em termos de dois componentes. O gráfico com a representação das preferências dos respondentes é chamado de mapa de preferências, ele mostra as preferências dos respondentes em relação aos atributos avaliados.
 
 
 ```r
@@ -114,7 +114,7 @@ fviz_pca_biplot(X = pca_2comp, label = 'var', repel = TRUE) +
 <img src="/assets/img/posicionamento-marcas/map-preferencias-1.png" style="display: block; margin: auto;" />
 
 
-Nesse gráfico, os atributos avaliados são representados através das setas e as preferências dos respondentes são representados através dos pontos. Podemos perceber que há três grupos de respondentes de acordo com suas preferências, tem aqueles valorizam bastante os efeitos estéticos das pastas de dentes - próximos dos atributos `attractive_teeth`, `shiny_teeth` e `freshens_breath` -, outros valorizam bastante os efeitos na saúde dental - próximos à `prevents_cavities` e `strengthens_gums` - e aqueles não que consideram a prevenção de caries importante - próximo à `decay_prevention_unimportant`.
+Nesse gráfico, os atributos avaliados são representados através das setas e as preferências dos respondentes são representados através dos pontos. Podemos perceber que há três grupos de respondentes de acordo com suas preferências, tem aqueles valorizam bastante os efeitos estéticos das pastas de dentes - próximos dos atributos `attractive_teeth`, `shiny_teeth` e `freshens_breath` -, outros valorizam bastante os efeitos na saúde dental - próximos à `prevents_cavities` e `strengthens_gums` - e aqueles não que consideram a prevenção de caries importante - próximos a `decay_prevention_unimportant`.
 
 A princípio os componentes não possuem nenhuma interpretação. Entretanto, podemos dar algum sentido a eles observando como as variáveis representadas estão correlacionados com eles.
 
@@ -146,11 +146,11 @@ map_prefer
 <img src="/assets/img/posicionamento-marcas/interpretacao-componente-1.png" style="display: block; margin: auto;" />
 
 
-Do ponto de vista de negócios, uma grande implicação do gráfico acima é a segmentação dos clientes a partir de seus gostos e a possibilidade de criar produtos diferenciados, direcionados a segmentos específicos. Assim, uma marca pode desenvolver dois produtos: um direcionados a clientes que se preocupa mais com a estética e outro com clientes que se preocupam mais com a saúde dos dentes e comunicar isso através de um marketing diferenciado.
+Do ponto de vista de negócios, uma grande implicação do gráfico acima é a segmentação dos clientes a partir de seus gostos e a possibilidade de criar produtos diferenciados, direcionados a segmentos específicos. Assim, uma marca pode desenvolver dois produtos: um direcionados a clientes que se preocupa mais com a estética e outro com clientes que se preocupam mais com a saúde dos dentes e comunicar isso através da sua estratégia de marketing.
 
 ### Posicionamento e mapas *join-space*
 
-Outro fator complementar às preferências dos clientes é o posicionamento da marca. O posicionamento de uma marca é entendido como a percepções que os clientes têm da marca. Por exemplo, uma marca *A* de creme dental pode ser percebida como uma marca cujo produtos estão associados à melhora da saúde bucal, enquanto a marca *B* pode ser percebida como aquela em que os uso dos produtos levem à dentes brilhantes.
+Outro fator complementar às preferências dos clientes é o posicionamento da marca. O posicionamento de uma marca é entendido como a percepções que os clientes têm dela. Por exemplo, uma marca *A* de creme dental pode ser percebida como uma marca cujo produtos estão associados à melhora da saúde bucal, enquanto a marca *B* pode ser percebida como aquela em que os uso dos produtos levem à dentes brilhantes.
 
 Dessa forma, o posicionamento de uma marca pode ser entendido como um esforço que a marca empreende para diferenciar-se em relação aos demais concorrentes e associar os seus produtos a determinados atributos. Considerando o atual momento em que os clientes são bombardeados por informações, um posicionamento que produza uma diferenciação clara da marca é essencial para o sucesso de qualquer negócio.
 
@@ -182,7 +182,7 @@ Poderíamos construir um gráfico semelhante ao mapa de preferências para a per
 
 Uma estratégia é unir os dois tipos de gráficos para responder a essas perguntas e aproveitar os benefícios dos mapas de preferências e mapas perceptuais. Esse tipo de gráfico é conhecido como mapas *Join-Space*. 
 
-A seguir criamos um gráfico desses, que junta as preferências dos respondentes e suas percepções sobre as empresas no mercado. De modo geral, representamos as avaliações das empresas em termos das duas dimensões obtidos para os dados sobre preferências. Após isso, adicionamos as representações ao mapa de preferências.
+A seguir criamos um gráfico desses, que junta as preferências dos respondentes e suas percepções sobre as empresas no mercado. De modo geral, representamos as avaliações das empresas em termos das duas dimensões obtidos a partir dos dados sobre preferências. Após isso, adicionamos as representações ao mapa de preferências.
 
 
 
@@ -197,23 +197,23 @@ funcs$add_empresas(gp = map_prefer, empresas = labels_emp, coordenadas = repre) 
 
 No gráfico acima, os atributos são representados pelas setas em azul, as preferências dos respondentes são representadas pelos pontos e as percepções sobre as empresas são representadas pelas setas em vermelho. Assim, vemos o posicionamento das empresas *A, B, C, D* e *E* assim como a preferência dos consumidores.
 
-A marca *E* é principalmente percebida como tendo produtos que impactam na aparência dos dentes e que não tem muita preocupação sobre a saúde. Já a marcas *A* e *D* são percebidas como tendo produtos que não têm preocupação com a saúde dos dentes e que têm efeito estéticos. A marca *C* é vista como tendo produtos que têm efeito principalmente na saúde dos dentes. Por fim, a marca *B* é percebida principalmente como não tendo efeito estético negativo sobre os dentes e com pouco efeito sobre a saúde dental.
+A marca *E* é principalmente percebida como tendo produtos que impactam na aparência dos dentes e que não tem muita preocupação sobre a saúde. Já a marcas *A* e *D* são percebidas como tendo produtos que não têm preocupação com a saúde dos dentes e que têm efeito estéticos. A marca *C* é vista como tendo produtos que têm efeito principalmente na saúde dos dentes. Por fim, a marca *B* é percebida principalmente como tendo efeito estético negativo sobre os dentes e com pouco efeito sobre a saúde dental.
 
-Essas conclusões foram determinadas a partir das relações entre os vetores que representam a os atributos e os vetores que representam as percepções sobre as marcas. Tais relações são mostradas a seguir:
+Essas conclusões foram determinadas a partir das relações entre os vetores que representam os atributos e os vetores que representam as percepções sobre as marcas. Tais relações são mostradas a seguir:
 
 <img src="/assets/img/posicionamento-marcas/interpretacao-vetores.PNG" style="display: block; margin: auto;" />
 
-No primeiro $(I)$ caso, o vetor *M* e *N* possuem alguma semelhança entre si, o grau com que *M* é semelhante com *N* é medida pela projeção ortogonal de *N* sobre *M*, isto é, a "sombra" de *N* sobre *M*. No segundo caso $(II)$, *M* e *N* não possuem nenhuma relação entre si e por fim no caso $(III)$ os vetores possuem relação opostas. Além disso, o tamanho da seta/vetor indica a intensidade do atributo/percepção representado.
+No caso $(I)$, o vetores *M* e *N* possuem alguma semelhança entre si, o grau com que *M* é semelhante com *N* é medida pela projeção ortogonal de *N* sobre *M*, isto é, a "sombra" de *N* sobre *M*. No caso $(II)$, *M* e *N* não possuem nenhuma relação entre si e por fim no caso $(III)$ os vetores possuem relação opostas. Além disso, o tamanho da seta/vetor indica a intensidade do atributo/percepção representado.
 
 Agora que já sabemos como interpretar os atributos e sua relação com o posicionamento, vamos passar falar sobre posicionamento relativo entre as marcas e a adequação do posicionamento às preferências.
 
 As marcas *A* e *D* possuem posicionamento bem semelhantes, isso significa que não há uma distinção clara entre ambas para os respondentes. Dessa forma, essas marcas são competidoras diretas. 
 
-As demais marcas possuem posicionamentos distintos. A marca *E* poderia melhorar seu posicionamento reforçando qualidades como `shiny_teeth` e `attractive_teeth` de modo a alcançar melhor as preferências dos consumidores nesse segmento. A marca *C* poderia melhorar seu posicionamento tonando mais intenso a percepção de cuidado com saúde bucal.
+As demais marcas possuem posicionamentos distintos. A marca *E* poderia melhorar seu posicionamento reforçando qualidades como `shiny_teeth` e `attractive_teeth` de modo a alcançar melhor as preferências dos consumidores nesse segmento. A marca *C* poderia melhorar seu posicionamento tornando mais intenso a percepção de cuidado com saúde bucal.
 
-Já a marca *D* possui um péssimo posicionamento. Ela é vista como uma marca cujo produto tem efeito oposto à boa aparência nos dentes. E nesse sentido não há mercado para ela. Uma foram de melhorar sua percepção é mudar seu posicionamento para uma marca que se preocupa com saúde bucal e competir com a marca *C*. 
+Já a marca *B* possui um péssimo posicionamento. Ela é vista como uma marca cujo produto tem efeito oposto à boa aparência nos dentes. E nesse sentido não há mercado para ela. Uma forma de melhorar sua percepção é mudar seu posicionamento para uma marca que se preocupa com saúde bucal e competir com a marca *C*. 
 
-Por fim, não há segmento de mercado que não é atendido dada as preferências dos respondentes e o posicionamento das empresas. Isso ocorreria se houvesse um segmento de clientes com preferências que não se aproximasse de nenhum posicionamento das marcas.
+Por fim, não há segmento de mercado que não seja atendido dada as preferências dos respondentes e o posicionamento das empresas. Isso ocorreria se houvesse um segmento de clientes com preferências que não se aproximasse de nenhum posicionamento das marcas.
 
 ### Considerações
 
